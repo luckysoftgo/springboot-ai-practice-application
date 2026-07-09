@@ -7,7 +7,7 @@ server:
       force: true
 
 instance:
-  key: sk-ws-H.EMHMIRM.ACe7.MEYCIQDnknvSk7rsILeC-Q-3djYnW5Mek9tUY9cp-ISTMB_6iAIhAPrsfSrfqO5ZZrbYvDd_k7j_dTV9HBYfCaAq4UyAU1gC
+  key: your api key
   #url: https://ws-thn9ujffyfcu6wu3.cn-beijing.maas.aliyuncs.com/compatible-mode/v1
   url: https://dashscope.aliyuncs.com/compatible-mode/v1
 
