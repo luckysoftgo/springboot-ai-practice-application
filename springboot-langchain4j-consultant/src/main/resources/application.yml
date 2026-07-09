@@ -1,0 +1,85 @@
+server:
+  port: 9999
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+
+instance:
+  key: sk-ws-H.EMHMIRM.ACe7.MEYCIQDnknvSk7rsILeC-Q-3djYnW5Mek9tUY9cp-ISTMB_6iAIhAPrsfSrfqO5ZZrbYvDd_k7j_dTV9HBYfCaAq4UyAU1gC
+  #url: https://ws-thn9ujffyfcu6wu3.cn-beijing.maas.aliyuncs.com/compatible-mode/v1
+  url: https://dashscope.aliyuncs.com/compatible-mode/v1
+
+langchain4j:
+  open-ai:
+    chat-model: # 聊天模型 -> 阻塞调用
+      base-url: ${instance.url} # 千问
+      api-key: ${instance.key}
+      model-name: qwen-plus
+      temperature: 0.7
+      max-tokens: 4096
+      log-requests: true
+      log-responses: true
+    streaming-chat-model: # 流式聊天模型 -> 流式调用
+      base-url: ${instance.url} # 千问
+      api-key: ${instance.key}
+      model-name: qwen-plus
+      log-requests: true
+      log-responses: true
+    embedding-model: # 向量模型 -> 指定向量模型
+      base-url: ${instance.url} # 千问
+      api-key: ${instance.key}
+      model-name: text-embedding-v3
+      log-requests: true
+      log-responses: true
+      max-segments-per-batch: 10 # 每批次最大分片数
+    image-model:  # 图像模型
+      base-url: ${instance.url} # 千问
+      api-key:  ${instance.key}
+      model-name: qwen-plus
+      log-requests: true
+      log-responses: true
+
+  community: # redis向量数据库
+    in-memory:
+      # 内存数据库不需要配置 host、port 或 password
+      # 它仅支持一个可选参数：max-size（最大容量，默认通常是 10000）
+      max-size: 10000
+    redis:
+      host: 127.0.0.1
+      port: 16379
+      password: 123456789
+
+## 日志信息
+logging:
+  level:
+    dev.langchain4j: debug # 日志级别
+
+spring:
+  data:
+    redis:
+      host: 127.0.0.1
+      port: 16379
+      password: 123456789
+  main:
+    allow-bean-definition-overriding: true
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/learning_practice_application?serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: 123456789
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+
+mybatis-plus:
+  configuration:
+    # 开启日志
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
+
+app:
+  embedding-store:
+    init: true  # 设置为false可跳过初始化,构建向量数据库操作对象-只需要初始化一次
+

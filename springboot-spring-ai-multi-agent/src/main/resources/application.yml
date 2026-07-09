@@ -1,0 +1,49 @@
+server:
+  port: 8088
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+
+instance:
+  key: sk-ws-H.EMHMIRM.ACe7.MEYCIQDnknvSk7rsILeC-Q-3djYnW5Mek9tUY9cp-ISTMB_6iAIhAPrsfSrfqO5ZZrbYvDd_k7j_dTV9HBYfCaAq4UyAU1gC
+  #url: https://ws-thn9ujffyfcu6wu3.cn-beijing.maas.aliyuncs.com/compatible-mode/v1
+  url: https://dashscope.aliyuncs.com/compatible-mode/v1
+
+spring:
+  application:
+    name: multi-agent-service
+  ai:
+    openai:
+      api-key: ${instance.key}
+      #api-key: ${OPENAI_API_KEY:ak_2IK59b6vQ6u03RZ1jS96l6u69ro8S}
+      # 国内可替换为 DeepSeek/Qwen 等兼容 OpenAI 格式的中转地址
+      # DeepSeek 示例: https://api.deepseek.com
+      # 通义千问示例: https://dashscope.aliyuncs.com/compatible-mode/v1
+      base-url: ${instance.url}
+      #base-url: ${OPENAI_BASE_URL:https://api.longcat.chat/openai}
+      chat:
+        options:
+          # 可替换为: deepseek-chat / qwen-max / claude-3-5-sonnet 等
+          model: qwen-plus
+          #model: ${OPENAI_MODEL:LongCat-2.0-Preview}
+          # Agent 需要稳定输出，temperature 不宜过高
+          temperature: 0.3
+          max-tokens: 4096
+    mcp:
+      client:
+        stdio:
+          servers:
+            filesystem:
+              command: npx
+              args:
+                - "-y"
+                - "@modelcontextprotocol/server-filesystem"
+                - "/tmp/mcp-data"
+## 日志打印
+logging:
+  level:
+    com.application.ai.practice: DEBUG
+    org.springframework.ai: INFO
+

@@ -1,0 +1,4 @@
+MemoryStoreConfig 和 RedisStoreConfig 只能存在一个，不能同时存在；否则会报错
+
+如果redis中安装了command 'FT._LIST'，那么就可以直接使用;
+
