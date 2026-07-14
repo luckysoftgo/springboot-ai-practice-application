@@ -11,9 +11,9 @@
     </parent>
 
     <groupId>com.application.ai.practive</groupId>
-    <artifactId>springboot-langchain4j-consultant</artifactId>
-    <name>springboot-langchain4j-consultant</name>
-    <description>langchain4j AI 智能顾问1</description>
+    <artifactId>springboot-langchain4j-volunteer</artifactId>
+    <name>springboot-langchain4j-volunteer</name>
+    <description>langchain4j AI 智能顾问2</description>
     <url>http://maven.apache.org</url>
 
     <properties>
@@ -28,7 +28,7 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
-                <version>3.5.16</version>
+                <version>4.1.0</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -77,14 +77,14 @@
         <!--langchain4j 起步依赖-->
         <dependency>
             <groupId>dev.langchain4j</groupId>
-            <artifactId>langchain4j-open-ai-spring-boot-starter</artifactId>
+            <artifactId>langchain4j-open-ai-spring-boot4-starter</artifactId>
             <version>${langchain4j.version}</version>
         </dependency>
 
         <!--AiServices 相关的依赖-->
         <dependency>
             <groupId>dev.langchain4j</groupId>
-            <artifactId>langchain4j-spring-boot-starter</artifactId>
+            <artifactId>langchain4j-spring-boot4-starter</artifactId>
             <version>${langchain4j.version}</version>
         </dependency>
 
@@ -124,7 +124,7 @@
         <!--
         <dependency>
             <groupId>dev.langchain4j</groupId>
-            <artifactId>langchain4j-community-redis-spring-boot-starter</artifactId>
+            <artifactId>langchain4j-community-redis-spring-boot4-starter</artifactId>
             <version>1.16.0-beta26</version>
         </dependency>
         -->
@@ -133,12 +133,33 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
-        <!--mybatis-->
+
+        <!-- MyBatis-Plus -->
         <dependency>
-            <groupId>org.mybatis.spring.boot</groupId>
-            <artifactId>mybatis-spring-boot-starter</artifactId>
-            <version>3.0.3</version>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-spring-boot4-starter</artifactId>
+            <version>3.5.16</version>
         </dependency>
+        <!-- Swagger3 接口文档 -->
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <version>2.6.0</version>
+        </dependency>
+
+        <!-- 工具 -->
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>5.8.26</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>easyexcel</artifactId>
+            <version>3.3.2</version>
+        </dependency>
+
         <!--mysql-->
         <dependency>
             <groupId>com.mysql</groupId>
@@ -152,6 +173,16 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <parameters>true</parameters>
+                </configuration>
             </plugin>
         </plugins>
     </build>

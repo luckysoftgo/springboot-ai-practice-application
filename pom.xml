@@ -13,6 +13,7 @@
 
     <modules>
         <module>springboot-langchain4j-consultant</module>
+        <module>springboot-langchain4j-volunteer</module>
         <module>springboot-spring-ai-multi-agent</module>
     </modules>
 
