@@ -7,8 +7,6 @@ import dev.langchain4j.service.TokenStream;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
-import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,13 +25,14 @@ public class AiChatController {
     /**
      * SSE流式对话输出
      */
-    @GetMapping(value = "/stream/chatAgent")
+    @PostMapping(value = "/stream/chatAgent")
     @Operation(summary = "AI流式对话（打字机效果）")
     public BaseResult<SseEmitter> chatAgent(@RequestBody ChatRequest request) {
         SseEmitter emitter = new SseEmitter(0L);
         TokenStream tokenStream = aiChatService.streamChat(request.getStudentId(), request.getQuestion());
         tokenStream.onPartialResponse(text -> {
             try {
+                System.out.println("结果信息是："+text);
                 emitter.send(SseEmitter.event().data(text));
             } catch (IOException e) {
                 emitter.complete();
@@ -65,7 +64,7 @@ public class AiChatController {
     /**
      * 一次性返回对话结果
      */
-    @GetMapping("/normalChat")
+    @PostMapping("/normalChat")
     @Operation(summary = "普通一次性对话")
     public BaseResult<String> normalChat(@RequestBody ChatRequest request) {
         String message = aiChatService.normalChat(request.getStudentId(), request.getQuestion());
