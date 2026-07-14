@@ -50,6 +50,10 @@ langchain4j:
       host: 127.0.0.1
       port: 16379
       password: 123456789
+  ## 链接重试机制
+  retry:
+    max-attempts: 5
+    delay: 1000ms
 
 ## 日志信息
 logging:
